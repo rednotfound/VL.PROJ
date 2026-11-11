@@ -33,8 +33,8 @@ two; `SetSRID` goes into VL.NetTopologySuite.
 | `tools\Test-VLPackage.ps1`, `tools\Test-VLPatch.ps1` | ✅ |
 | `tools\Compile-HelpPatches.ps1` (`vvvvc`, generated C# read) | ✅ 3 of 3; `Reproject`, `CRS` and the VL.NetTopologySuite nodes resolve; `To SRID` is wired; no NU1101 |
 | vvvv GUI | ✅ both HowTos computed, captured on 2026-11-11: RD square to lon/lat with accuracy 1 m; SRID 0 refused; CRS 28992 = Amersfoort / RD New, metre, area 4.3° × 3.0° |
-| F1 help flags | set by the generator (High on each HowTo's node), not audited: this repository's `Test-VLPatch` is vl-geojson's, which has no F1 audit. F1 not pressed yet |
-| `Test-Install` | not run yet |
+| `tools\Test-HelpFlags.ps1` | ✅ 2 of 2 nodes carry a High flag. Nodes are read from the BUILT assembly's public types. Negative-tested: lowering `CRS`'s flag fails exactly `CRS`. F1 itself not pressed yet |
+| `tools\Test-Install.ps1` | ✅ installs from `dist\feed` with NetTopologySuite and VL.NetTopologySuite, and 3 of 3 help patches compile from the install. The nupkg was listed: all four bundled PROJ files are in `lib/net8.0`, SharpProj.dll at 7.0 MB |
 
 ## What is different from the siblings: SharpProj is bundled, not a dependency
 
@@ -78,8 +78,10 @@ dotnet test test\VL.PROJ.Tests\VL.PROJ.Tests.csproj
 .\build.ps1                       # build + stage dist\ (our dll + the four bundled PROJ files + help)
 .\tools\Test-VLPackage.ps1        # static package checks
 .\tools\Test-VLPatch.ps1          # structural checks on every .vl and Help.xml
+.\tools\Test-HelpFlags.ps1        # every node opens a help patch on F1 (read from the built dll)
 .\pack.ps1                        # dist\feed\VL.PROJ.<version>.nupkg
 .\tools\Compile-HelpPatches.ps1   # vvvvc on every help patch, then READS the generated C#
+.\tools\Test-Install.ps1          # nuget install from dist\feed, then compile the INSTALLED help patches
 .\tools\Open-HelpPatch.ps1 "Move" # open one in vvvv; pid in %TEMP%\vl-proj-vvvv.pid, close only that pid
 ```
 
