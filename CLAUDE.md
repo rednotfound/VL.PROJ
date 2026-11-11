@@ -34,6 +34,7 @@ two; `SetSRID` goes into VL.NetTopologySuite.
 | `tools\Compile-HelpPatches.ps1` (`vvvvc`, generated C# read) | ✅ 3 of 3; `Reproject`, `CRS` and the VL.NetTopologySuite nodes resolve; `To SRID` is wired; no NU1101 |
 | vvvv GUI | ✅ both HowTos computed, captured on 2026-11-11: RD square to lon/lat with accuracy 1 m; SRID 0 refused; CRS 28992 = Amersfoort / RD New, metre, area 4.3° × 3.0° |
 | `tools\Test-HelpFlags.ps1` | ✅ 2 of 2 nodes carry a High flag. Nodes are read from the BUILT assembly's public types. Negative-tested: lowering `CRS`'s flag fails exactly `CRS`. F1 itself not pressed yet |
+| **acceptance** | ✅ 2026-11-11. 44 3D BAG footprints from vl-cityjson's Delft tile (EPSG:7415, horizontal 28992) were moved by `Reproject` to 4326 and drawn by VL.Mapsui over OpenStreetMap. They sit exactly on OSM's buildings at TU Delft; OSM NL imported the same BAG, so a wrong transform would show as an offset. See [docs/acceptance-delft-2026-11-11.png](docs/acceptance-delft-2026-11-11.png); to rebuild it, `tools\acceptance\` |
 | `tools\Test-Install.ps1` | ✅ installs from `dist\feed` with NetTopologySuite and VL.NetTopologySuite, and 3 of 3 help patches compile from the install. The nupkg was listed: all four bundled PROJ files are in `lib/net8.0`, SharpProj.dll at 7.0 MB |
 
 ## What is different from the siblings: SharpProj is bundled, not a dependency

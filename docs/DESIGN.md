@@ -125,6 +125,18 @@ A 3D BAG building from vl-cityjson, in EPSG:7415 / 28992:
 
 This is concrete, it is ours, and it fails visibly when wrong.
 
+**Passed on 2026-11-11.**
+- Data: 44 LoD0 footprints within 200 m of the Delft tile's centre (`9-284-556`; RD 85065 446394,
+  which is 4.368754, 52.001511) went through `FromWKT` (SRID 28992), then `Reproject` (4326),
+  then VL.Mapsui's `Geometry` layer over `OpenStreetMap`.
+- Result: they sit exactly on OSM's buildings: the Faculty of Industrial Design Engineering,
+  De Haagse Hogeschool, Pulse, Building 31 ([screenshot](acceptance-delft-2026-11-11.png)).
+- Why that is a real test: OSM's Dutch buildings were imported from the same BAG, so the
+  comparison is with independent data of the same objects.
+- Rebuild it with `tools\acceptance\`.
+- One trap on the way: VL.Mapsui's `OpenStreetMap` node has `Enabled` false by default (its help
+  wires a True IOBox), so the first run drew the buildings on white.
+
 ## Open questions for the maintainer
 
 1. Node names: `Reproject` (the GIS word) or something else? `CRS` for the information node?
