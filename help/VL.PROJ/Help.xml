@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<!--
+	Ordering lives here, and nowhere else: the five prefixes (Explanation, HowTo, Reference, Example,
+	Tutorial) and this file, as in every pack shipped with vvvv and every sibling of this one.
+	A new patch is appended to the right Topic.
+-->
+<Pack>
+	<Topic title="Start here">
+		<VLDocument link="Explanation Overview of available nodes.vl" tags="overview,explanation,start,proj,crs,epsg,reproject,projection" />
+	</Topic>
+	<Topic title="Coordinate systems">
+		<VLDocument link="HowTo Move a geometry to another CRS.vl" tags="reproject,transform,crs,srid,epsg,wgs84,4326,rdnew,28992,webmercator,3857,utm,lonlat,projection,accuracy" />
+		<VLDocument link="HowTo Look up a CRS.vl" tags="crs,epsg,srid,name,units,areaofuse,geographic,projected,degree,metre" />
+	</Topic>
+</Pack>

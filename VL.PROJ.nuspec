@@ -1,0 +1,79 @@
+<?xml version="1.0" encoding="utf-8"?>
+<package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
+  <metadata>
+    <id>VL.PROJ</id>
+    <version>0.0.1-alpha</version>
+    <title>VL.PROJ - coordinate transformation for NetTopologySuite in vvvv gamma</title>
+    <authors>VL.PROJ Contributors</authors>
+    <owners>VL.PROJ Contributors</owners>
+    <requireLicenseAcceptance>false</requireLicenseAcceptance>
+    <license type="expression">MIT</license>
+    <description>
+      EARLY - not ready for real work yet.
+
+      Moves NetTopologySuite geometry from one coordinate reference system to another with PROJ,
+      the engine every GIS uses. Reproject reads the CRS a geometry is in from its SRID and moves
+      it to another EPSG code, saying how accurate that is and warning when coordinates lie
+      outside where a CRS is meant to be used. CRS says what an EPSG code is: name, units, area
+      of use. Longitude comes first, always.
+
+      PROJ 9.5.1 and its EPSG database come bundled (through SharpProj), so nothing else needs
+      installing. Windows x64 only, as vvvv gamma is. Requires the Visual C++ 2015-2022 runtime,
+      which most Windows machines have.
+
+      Requires vvvv gamma 7.2 or newer (.NET 8).
+    </description>
+    <summary>PROJ coordinate transformation for VL.NetTopologySuite, as nodes for vvvv gamma.</summary>
+    <releaseNotes>
+      0.0.1-alpha - In development, not published. Reproject and CRS, in category PROJ.
+    </releaseNotes>
+    <copyright>Copyright 2026 VL.PROJ Contributors</copyright>
+    <!-- The "VL" tag is what makes the pack discoverable at https://vvvv.org/packs -->
+    <tags>VL vvvv gamma proj crs epsg projection reproject coordinates gis geometry nts nettopologysuite spatial</tags>
+
+    <!--
+      Must match the NugetDependency lines in VL.PROJ.vl (the .vl teaches VL the types, the nuspec
+      makes the package resolvable): every node here names NetTopologySuite's Geometry.
+
+      SharpProj is deliberately NOT a dependency. It is bundled in lib\net8.0 below, because it is
+      C++/CLI and needs our ijwhost.dll beside it, which a NuGet-installed copy in its own folder
+      could never have (docs/DESIGN.md, measured in vvvv 2026-11-11).
+
+      VL.Core and VL.CoreLib are absent: they ship inside vvvv.
+    -->
+    <dependencies>
+      <group targetFramework="net8.0">
+        <dependency id="NetTopologySuite" version="2.6.0" />
+        <!--
+          Not needed by any node here (they name only NTS types) but by the help: geometry is made
+          with VL.NetTopologySuite's FromWKT and GeometryFactory, read with its SRID and ToWKT, and
+          drawn by its Geometry IOBox. vvvv does not fetch a missing document dependency by itself.
+          The same reasoning as VL.NetTopologySuite.GeoJSON's dependency on it.
+        -->
+        <dependency id="VL.NetTopologySuite" version="0.0.6-alpha" />
+      </group>
+    </dependencies>
+  </metadata>
+
+  <files>
+    <!-- Entry point. Must sit at the package root, no subfolder. -->
+    <file src="VL.PROJ.vl" target="" />
+
+    <file src="src\VL.PROJ\bin\Release\net8.0\VL.PROJ.dll" target="lib\net8.0\" />
+    <file src="src\VL.PROJ\bin\Release\net8.0\VL.PROJ.xml" target="lib\net8.0\" />
+
+    <!-- PROJ, bundled: see the comment above the dependencies. All four or none works. -->
+    <file src="src\VL.PROJ\bin\Release\net8.0\SharpProj.dll" target="lib\net8.0\" />
+    <file src="src\VL.PROJ\bin\Release\net8.0\ijwhost.dll" target="lib\net8.0\" />
+    <file src="src\VL.PROJ\bin\Release\net8.0\proj.db" target="lib\net8.0\" />
+    <file src="src\VL.PROJ\bin\Release\net8.0\proj.ini" target="lib\net8.0\" />
+
+    <!-- Help patches, and Help.xml (ordering and tags; the glob takes .vl only). -->
+    <file src="help\VL.PROJ\*.vl" target="help\" />
+    <file src="help\VL.PROJ\Help.xml" target="help\" />
+
+    <file src="LICENSE" target="docs\" />
+    <file src="THIRD-PARTY-NOTICES.md" target="docs\" />
+    <file src="docs\DESIGN.md" target="docs\" />
+  </files>
+</package>

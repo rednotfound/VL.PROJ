@@ -1,0 +1,104 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns:p="property" xmlns:r="reflection" Id="Acg2T4ad3l7a0mVyzNzkvE" LanguageVersion="2025.7.4" Version="0.128">
+  <NugetDependency Id="SEtWf62C5AzpSPueoEGYEO" Location="VL.CoreLib" Version="2025.7.4" />
+  <NugetDependency Id="FroEgZ4bTuzkfJzGNLfwT8" Location="VL.PROJ" Version="0.0.0" />
+  <Patch Id="O1fjeXlZzPDLkAU3Mfvm9n">
+    <Canvas Id="ON06UdFXbsvQNGdoRKEnm7" DefaultCategory="Main" BordersChecked="false" CanvasType="FullCategory" />
+    <!--
+
+    ************************ Application ************************
+
+-->
+    <Node Name="Application" Bounds="100,100" Id="F57EUZ7z75C0XMfWQceZum">
+      <p:NodeReference>
+        <Choice Kind="ContainerDefinition" Name="Process" />
+        <CategoryReference Kind="Category" Name="Primitive" />
+      </p:NodeReference>
+      <Patch Id="GPs6SiOnPIY4zy5Wl9Iuni">
+        <Canvas Id="VwFqTLw0cjB6uyY0988Tci" CanvasType="Group">
+          <Pad Id="HeqGF3JB88MbWc4iDGHCOT" Bounds="60,40,150,41" ShowValueBox="true" isIOBox="true" Value="Use CRS!">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">20</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Pad Id="A4RZOMqWfV0HHh6ueMEc43" Bounds="60,95,700,28" ShowValueBox="true" isIOBox="true" Value="Ask what an EPSG code is: its name, its units, and where on Earth it is meant to be used.">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Pad Id="FSBrJZbFqKKGY2jh1FiSiT" Comment="" Bounds="60,175,80,15" ShowValueBox="true" isIOBox="true" Value="28992">
+            <p:TypeAnnotation LastCategoryFullName="Primitive" LastDependency="VL.CoreLib.vl">
+              <Choice Kind="TypeFlag" Name="Integer32" />
+            </p:TypeAnnotation>
+          </Pad>
+          <Pad Id="SFnHLenmPSY4uPOx1BBL6H" Bounds="840,170,320,44" ShowValueBox="true" isIOBox="true" Value="&lt; Try 4326, 3857, 6668 (Japan), 4490 (China), 32650 (UTM zone 50N).">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Node Bounds="60,215,120,19" Id="BjVhV28xdaakp9k4bIB4ao">
+            <p:NodeReference LastCategoryFullName="PROJ" LastDependency="VL.PROJ.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="OperationCallFlag" Name="CRS" />
+            </p:NodeReference>
+            <p:HelpFocus p:Assembly="VL.Lang" p:Type="VL.Model.HelpPriority">High</p:HelpFocus>
+            <Pin Id="D6Nd01TIGYJZIQdSF88l6d" Name="SRID" Kind="InputPin" />
+            <Pin Id="UBy74Ds8SgJSXLWzf3HJS7" Name="Name" Kind="OutputPin" />
+            <Pin Id="GYkRSuDGx9DjWYxFLLYrTF" Name="Is Geographic" Kind="OutputPin" />
+            <Pin Id="QccIecvUD4usrFE69f71LU" Name="Units" Kind="OutputPin" />
+            <Pin Id="Q4PWfyPO9iMmhApVJt4s8K" Name="Area Of Use" Kind="OutputPin" />
+            <Pin Id="DSkbCPqiuyuLx4ja442d7t" Name="Success" Kind="OutputPin" />
+          </Node>
+          <Pad Id="FFmX6l1KH9I2vnEhFAhbCZ" Comment="" Bounds="60,260,500,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="VugkUdqrMJ9QGqkkZZcgoo" Comment="Is Geographic" Bounds="60,295,35,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="HGt9dV0Cmr9ctHFY4OUWzG" Comment="Units" Bounds="60,325,120,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="HN2GxEwX7Coz8HBL7pFnL2" Comment="Success" Bounds="60,355,35,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="NkR3ZC7JlZ1u9OLi0m3YnA" Bounds="840,290,320,62" ShowValueBox="true" isIOBox="true" Value="&lt; Geographic means longitude and latitude in degrees; otherwise a projected system, usually in metres.">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Pad Id="FCukGrO7RyWJkaQ0a0mKXV" Comment="" Bounds="560,260,240,170" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="L8ijP9qW5AApg7b4JyDWpO" Bounds="840,380,320,44" ShowValueBox="true" isIOBox="true" Value="&lt; Area Of Use is drawn in longitude and latitude (SRID 4326).">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+        </Canvas>
+        <Patch Id="ANejnL2zffKrO7mseaqoRD" Name="Create" />
+        <Patch Id="ML9RS6hJaAKW8wAcrhiOdq" Name="Update" />
+        <ProcessDefinition Id="LmJ3SCqf1tLlODQEnYgiDH">
+          <Fragment Id="HI7p97tuLzZQScEVnOlNwh" Patch="ANejnL2zffKrO7mseaqoRD" Enabled="true" />
+          <Fragment Id="IT8sUm5UCMKYgczsDcSRBJ" Patch="ML9RS6hJaAKW8wAcrhiOdq" Enabled="true" />
+        </ProcessDefinition>
+        <Link Id="PGjjNeFOwOfqYNYmmnoa9b" Ids="FSBrJZbFqKKGY2jh1FiSiT,D6Nd01TIGYJZIQdSF88l6d" />
+        <Link Id="Nvq6PhQQFxAvaNPI2PzBMB" Ids="UBy74Ds8SgJSXLWzf3HJS7,FFmX6l1KH9I2vnEhFAhbCZ" />
+        <Link Id="V7YePUnfMISFBX0SYtNWtd" Ids="GYkRSuDGx9DjWYxFLLYrTF,VugkUdqrMJ9QGqkkZZcgoo" />
+        <Link Id="HiGdk98GuWksTefAI35NQ8" Ids="QccIecvUD4usrFE69f71LU,HGt9dV0Cmr9ctHFY4OUWzG" />
+        <Link Id="PXBt6gmb8B9rGMlTgDHAEy" Ids="DSkbCPqiuyuLx4ja442d7t,HN2GxEwX7Coz8HBL7pFnL2" />
+        <Link Id="MNeAsoeoupDdJxAgVTqDCh" Ids="Q4PWfyPO9iMmhApVJt4s8K,FCukGrO7RyWJkaQ0a0mKXV" />
+      </Patch>
+    </Node>
+  </Patch>
+  <NugetDependency Id="CsKU9Y7OHbH9mZwzlCY80j" Location="VL.NetTopologySuite" Version="0.0.0" />
+</Document>

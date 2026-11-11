@@ -1,0 +1,201 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Document xmlns:p="property" xmlns:r="reflection" Id="OR6dGoJCS526qmzGrEpSmI" LanguageVersion="2025.7.4" Version="0.128">
+  <NugetDependency Id="POgFHJiI6ua6NhpXEKrShl" Location="VL.CoreLib" Version="2025.7.4" />
+  <NugetDependency Id="SAI9hUFBtwE1tWzdc1bja3" Location="VL.PROJ" Version="0.0.0" />
+  <Patch Id="V7y5uINDr4GZ90kd1lTK9z">
+    <Canvas Id="LNjxEQjYc2JiL2300A747A" DefaultCategory="Main" BordersChecked="false" CanvasType="FullCategory" />
+    <!--
+
+    ************************ Application ************************
+
+-->
+    <Node Name="Application" Bounds="100,100" Id="DWcBDgoxnIS2hyzJQbFovk">
+      <p:NodeReference>
+        <Choice Kind="ContainerDefinition" Name="Process" />
+        <CategoryReference Kind="Category" Name="Primitive" />
+      </p:NodeReference>
+      <Patch Id="Nf7XNCflbEnLVtKx9f3pKi">
+        <Canvas Id="Cpu5MBZdmdkUenF6JvFaIg" CanvasType="Group">
+          <Pad Id="L3ythD9FTExREMFmppJfh7" Bounds="60,40,240,41" ShowValueBox="true" isIOBox="true" Value="Use Reproject!">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">20</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Pad Id="RLkRTD21h5bS4uBlZgFN1u" Bounds="60,95,700,46" ShowValueBox="true" isIOBox="true" Value="A geometry carries its coordinate reference system as an SRID. Reproject moves it to another EPSG code and says how well that went.">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Pad Id="Mhdx3Cd8jLVSop9l6zRBtl" Comment="" Bounds="60,175,470,15" ShowValueBox="true" isIOBox="true" Value="POLYGON ((154900 462900, 155100 462900, 155100 463100, 154900 463100, 154900 462900))">
+            <p:TypeAnnotation LastCategoryFullName="Primitive" LastDependency="VL.CoreLib.vl">
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+          </Pad>
+          <Node Bounds="560,175,110,19" Id="MbU416DwAIHcRY91JBidfL">
+            <p:NodeReference LastCategoryFullName="NetTopologySuite.Geometry" LastDependency="VL.NetTopologySuite.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="OperationCallFlag" Name="GeometryFactory" />
+              <PinReference Kind="InputPin" Name="SRID" />
+            </p:NodeReference>
+            <Pin Id="Dk2jnLnuiblOIDaLl0sULl" Name="SRID" Kind="InputPin" DefaultValue="28992">
+              <p:TypeAnnotation LastCategoryFullName="Primitive" LastDependency="VL.CoreLib.vl">
+                <Choice Kind="TypeFlag" Name="Integer32" />
+              </p:TypeAnnotation>
+            </Pin>
+            <Pin Id="PaN0pV8X7ZsMZlDPG1gqkh" Name="Result" Kind="OutputPin" />
+          </Node>
+          <Pad Id="A5V3ashDas6dLxUrLk1W17" Bounds="840,170,320,44" ShowValueBox="true" isIOBox="true" Value="&lt; 28992 is RD New, the Dutch grid, in metres. The geometry carries it as its SRID.">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Node Bounds="60,215,90,19" Id="TUQzXoULjwxdEHCG5upn5e">
+            <p:NodeReference LastCategoryFullName="NetTopologySuite.IO" LastDependency="VL.NetTopologySuite.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="OperationCallFlag" Name="FromWKT" />
+            </p:NodeReference>
+            <Pin Id="PjCatNqHEzonki39LBAAHH" Name="WKT" Kind="InputPin" />
+            <Pin Id="BwKT9bofam3sLrFgf2thVf" Name="Factory" Kind="InputPin" />
+            <Pin Id="BKrNElt1RD7ifMImL2qDnc" Name="Result" Kind="OutputPin" />
+            <Pin Id="Bll5UiJ033uYTSZX2f91GG" Name="Success" Kind="OutputPin" />
+          </Node>
+          <Node Bounds="60,265,120,19" Id="KfTb9axQExLEtItM0iy9u9">
+            <p:NodeReference LastCategoryFullName="PROJ" LastDependency="VL.PROJ.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="OperationCallFlag" Name="Reproject" />
+              <PinReference Kind="InputPin" Name="To SRID" />
+            </p:NodeReference>
+            <p:HelpFocus p:Assembly="VL.Lang" p:Type="VL.Model.HelpPriority">High</p:HelpFocus>
+            <Pin Id="SIdnoXJ7gYmTQPmEYzNdOX" Name="Geometry" Kind="InputPin" />
+            <Pin Id="Lm041VcUENFECgo2cy6GZ3" Name="To SRID" Kind="InputPin" DefaultValue="4326">
+              <p:TypeAnnotation LastCategoryFullName="Primitive" LastDependency="VL.CoreLib.vl">
+                <Choice Kind="TypeFlag" Name="Integer32" />
+              </p:TypeAnnotation>
+            </Pin>
+            <Pin Id="NuT1VsxeGo9s4VjK4wRJis" Name="Output" Kind="OutputPin" />
+            <Pin Id="OB98QdNSulWGq0LdPM4Kln" Name="Success" Kind="OutputPin" />
+            <Pin Id="Ouutb53ND8WRpEhILz6oyQ" Name="Message" Kind="OutputPin" />
+            <Pin Id="UxXQ7WbAhhmB2nHDKWjbjg" Name="Accuracy" Kind="OutputPin" />
+          </Node>
+          <Pad Id="T3qkH8OuqS3l3fEiY1u2D1" Bounds="840,255,320,62" ShowValueBox="true" isIOBox="true" Value="&lt; To SRID 4326 is WGS 84: longitude and latitude, longitude first. Try 3857 (Web Mercator) or 32631 (UTM zone 31N).">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Pad Id="QJY8CcfmyQqcu4C7kRI5aI" Comment="" Bounds="60,310,180,120" ShowValueBox="true" isIOBox="true" />
+          <Node Bounds="300,310,45,19" Id="Mpr6XeHtL85ImgmVVnYyTF">
+            <p:NodeReference LastCategoryFullName="NetTopologySuite.IO" LastDependency="VL.NetTopologySuite.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="OperationCallFlag" Name="ToWKT" />
+            </p:NodeReference>
+            <Pin Id="LsVb8tvy126AnTXqM139g3" Name="Geometry" Kind="InputPin" />
+            <Pin Id="D2LBaI9TuiNWxBMNPZfWVP" Name="Include Z" Kind="InputPin" />
+            <Pin Id="VGutAcUZzTtTaZy6UBw3o7" Name="Result" Kind="OutputPin" />
+          </Node>
+          <Pad Id="MMHEySiHDVwvLXBZKRLSuz" Comment="" Bounds="300,345,500,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="Tm5ePHFpt4GrQdhZD6ymIc" Comment="Success" Bounds="300,380,35,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="EdDxxDOgTBakAmsX8tzP6j" Comment="Accuracy" Bounds="300,410,60,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="LTUkGqHXCZVLvkZOAePhQ6" Comment="" Bounds="300,440,500,30" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="Lfk2iOogEswJjuqE2eTRGd" Bounds="840,375,320,44" ShowValueBox="true" isIOBox="true" Value="&lt; Accuracy is what PROJ says the move is good to, in metres.">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Pad Id="A5HB3XLsh5O9csbnoykcbm" Bounds="840,427,320,62" ShowValueBox="true" isIOBox="true" Value="&lt; Outside the area a CRS is meant for, coordinates are still moved, and Message says so.">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+          <Pad Id="EAe5NTEKw1T2r3pWMgVGZd" Comment="" Bounds="60,540,200,15" ShowValueBox="true" isIOBox="true" Value="POINT (155000 463000)">
+            <p:TypeAnnotation LastCategoryFullName="Primitive" LastDependency="VL.CoreLib.vl">
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+          </Pad>
+          <Node Bounds="60,580,90,19" Id="PT9Efcxbk0piY83C2Zmyy0">
+            <p:NodeReference LastCategoryFullName="NetTopologySuite.IO" LastDependency="VL.NetTopologySuite.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="OperationCallFlag" Name="FromWKT" />
+            </p:NodeReference>
+            <Pin Id="M3LZoo2oKyKyyeJWzepCkV" Name="WKT" Kind="InputPin" />
+            <Pin Id="UZ4WtYdArETlOjR1ZjHtT7" Name="Factory" Kind="InputPin" />
+            <Pin Id="Pu452B9XiyjG4aFfYxOevo" Name="Result" Kind="OutputPin" />
+            <Pin Id="AGmKxCDuwhGdrKxLgouUTV" Name="Success" Kind="OutputPin" />
+          </Node>
+          <Node Bounds="60,630,120,19" Id="HUvZOOkOe15MvozQSaxT8N">
+            <p:NodeReference LastCategoryFullName="PROJ" LastDependency="VL.PROJ.vl">
+              <Choice Kind="NodeFlag" Name="Node" Fixed="true" />
+              <Choice Kind="OperationCallFlag" Name="Reproject" />
+              <PinReference Kind="InputPin" Name="To SRID" />
+            </p:NodeReference>
+            <p:HelpFocus p:Assembly="VL.Lang" p:Type="VL.Model.HelpPriority">High</p:HelpFocus>
+            <Pin Id="PL1OG675Zg56bAxLy1JMiT" Name="Geometry" Kind="InputPin" />
+            <Pin Id="Rp1TvuYFtsstM4V4XZB4ha" Name="To SRID" Kind="InputPin" DefaultValue="4326">
+              <p:TypeAnnotation LastCategoryFullName="Primitive" LastDependency="VL.CoreLib.vl">
+                <Choice Kind="TypeFlag" Name="Integer32" />
+              </p:TypeAnnotation>
+            </Pin>
+            <Pin Id="OJW1vxzsJDI4iVRL9S70rK" Name="Output" Kind="OutputPin" />
+            <Pin Id="UgPfjl64SMcH3jlpDrmQsl" Name="Success" Kind="OutputPin" />
+            <Pin Id="N9anDsJ6bLvOGjGWuoabB6" Name="Message" Kind="OutputPin" />
+            <Pin Id="EvCnb1QdNNmXflRVPVahiM" Name="Accuracy" Kind="OutputPin" />
+          </Node>
+          <Pad Id="I6QeIYjGe7J2ikkyFBTGXC" Comment="Success" Bounds="60,675,35,15" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="RBpnw5TAhJiB4td50Qe2Qe" Comment="" Bounds="60,705,700,30" ShowValueBox="true" isIOBox="true" />
+          <Pad Id="VoFtCdtIYH2W9FfTCVy6cE" Bounds="840,575,320,62" ShowValueBox="true" isIOBox="true" Value="&lt; No Factory, so SRID 0: unknown. Reproject refuses rather than guess. Give the geometry the EPSG code its numbers are in.">
+            <p:TypeAnnotation>
+              <Choice Kind="TypeFlag" Name="String" />
+            </p:TypeAnnotation>
+            <p:ValueBoxSettings>
+              <p:fontsize p:Type="Int32">9</p:fontsize>
+              <p:stringtype p:Assembly="VL.Core" p:Type="VL.Core.StringType">Comment</p:stringtype>
+            </p:ValueBoxSettings>
+          </Pad>
+        </Canvas>
+        <Patch Id="HPaHuayPprK88HUqe7qOQq" Name="Create" />
+        <Patch Id="KfiwLDEXk9I7wRZAFPk7tw" Name="Update" />
+        <ProcessDefinition Id="UO39wKPSwyuoFplmEnkvoB">
+          <Fragment Id="ScXrmAMMZNtZUMNrjP0UIU" Patch="HPaHuayPprK88HUqe7qOQq" Enabled="true" />
+          <Fragment Id="EiAjG7FhY2nmcR0r5ZcPIO" Patch="KfiwLDEXk9I7wRZAFPk7tw" Enabled="true" />
+        </ProcessDefinition>
+        <Link Id="RpAg05GpL79NCvX5sHp1CW" Ids="Mhdx3Cd8jLVSop9l6zRBtl,PjCatNqHEzonki39LBAAHH" />
+        <Link Id="JmBb9WCm4LQo9p5REmyecC" Ids="PaN0pV8X7ZsMZlDPG1gqkh,BwKT9bofam3sLrFgf2thVf" />
+        <Link Id="EyR9SFx8lKELK49ZwMdMfX" Ids="BKrNElt1RD7ifMImL2qDnc,SIdnoXJ7gYmTQPmEYzNdOX" />
+        <Link Id="QBAfatcHu9qBtM7OCiMvfr" Ids="NuT1VsxeGo9s4VjK4wRJis,QJY8CcfmyQqcu4C7kRI5aI" />
+        <Link Id="Pc6NVyh3EFt0xGu3QAEVaw" Ids="NuT1VsxeGo9s4VjK4wRJis,LsVb8tvy126AnTXqM139g3" />
+        <Link Id="G36pwnbYZ6hBkCQHQIG6eI" Ids="VGutAcUZzTtTaZy6UBw3o7,MMHEySiHDVwvLXBZKRLSuz" />
+        <Link Id="OSafaahr0QKhBAHH6tIkpz" Ids="OB98QdNSulWGq0LdPM4Kln,Tm5ePHFpt4GrQdhZD6ymIc" />
+        <Link Id="SFxl7ywSFeB2w00ebTYhU7" Ids="UxXQ7WbAhhmB2nHDKWjbjg,EdDxxDOgTBakAmsX8tzP6j" />
+        <Link Id="MUK68sZG9iGIIab1DfLTpr" Ids="Ouutb53ND8WRpEhILz6oyQ,LTUkGqHXCZVLvkZOAePhQ6" />
+        <Link Id="RDKElnaRpxOEw1t9b6jnmT" Ids="EAe5NTEKw1T2r3pWMgVGZd,M3LZoo2oKyKyyeJWzepCkV" />
+        <Link Id="EZzjbCf5UaeFCDp3FYda4K" Ids="Pu452B9XiyjG4aFfYxOevo,PL1OG675Zg56bAxLy1JMiT" />
+        <Link Id="GYDRdYkohF08NKWKgMAvOA" Ids="UgPfjl64SMcH3jlpDrmQsl,I6QeIYjGe7J2ikkyFBTGXC" />
+        <Link Id="AigsUHe6mg6ZPGnGiGKwML" Ids="N9anDsJ6bLvOGjGWuoabB6,RBpnw5TAhJiB4td50Qe2Qe" />
+      </Patch>
+    </Node>
+  </Patch>
+  <NugetDependency Id="OMwr4TxtVtMFB08gvEO4oB" Location="VL.NetTopologySuite" Version="0.0.0" />
+</Document>

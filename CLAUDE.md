@@ -17,11 +17,24 @@ about drawing, maps or file formats. It is a member of the VL.NetTopologySuite f
   cost. Rule 1 (`[assembly: ImportAsIs]`) and rule 2 (an upstream library must be a package in a
   package repository) apply here exactly as there.
 
-**State (2026-11-11): started.**
-- Two nodes, `Reproject` and `CRS`, with 23 tests (`dotnet test`).
-- Not packaged yet: no `.vl`, no nuspec, no build script, no help patch.
-- The node names and the version-one scope are proposals the maintainer has not confirmed
-  (DESIGN, "Open questions").
+**State (2026-11-11): version one built and seen working in vvvv 7.4.** Nothing is published, and
+the repository has no remote.
+- Two nodes, `Reproject` and `CRS`, in category `PROJ`.
+- 23 tests.
+- Packaged: `VL.PROJ.vl`, nuspec, `build.ps1` / `pack.ps1`, and a 4.7 MB nupkg.
+- Three help patches: the Explanation, `HowTo Move a geometry to another CRS` and `HowTo Look up a CRS`.
+
+The maintainer confirmed on 2026-11-11: the names `Reproject` and `CRS`; version one is those
+two; `SetSRID` goes into VL.NetTopologySuite.
+
+| check | state |
+|---|---|
+| `dotnet test` | ✅ 23 |
+| `tools\Test-VLPackage.ps1`, `tools\Test-VLPatch.ps1` | ✅ |
+| `tools\Compile-HelpPatches.ps1` (`vvvvc`, generated C# read) | ✅ 3 of 3; `Reproject`, `CRS` and the VL.NetTopologySuite nodes resolve; `To SRID` is wired; no NU1101 |
+| vvvv GUI | ✅ both HowTos computed, captured on 2026-11-11: RD square to lon/lat with accuracy 1 m; SRID 0 refused; CRS 28992 = Amersfoort / RD New, metre, area 4.3° × 3.0° |
+| F1 help flags | set by the generator (High on each HowTo's node), not audited: this repository's `Test-VLPatch` is vl-geojson's, which has no F1 audit. F1 not pressed yet |
+| `Test-Install` | not run yet |
 
 ## What is different from the siblings: SharpProj is bundled, not a dependency
 
@@ -55,16 +68,34 @@ this one cannot (measured 2026-11-11, inside vvvv 7.4):
 
 ## Commands
 
+The tools are vl-geojson's, carried with their package names changed. `HelpPatchGen.ps1` is
+VL.NetTopologySuite's. The launcher adds vl-nettopologysuite's `dist` and `deps`, because the help
+patches use its nodes and drawn IOBoxes.
+
 ```powershell
-dotnet build src\VL.PROJ\VL.PROJ.csproj -c Release
+# vvvv must be CLOSED for build/pack/compile - they refuse otherwise
 dotnet test test\VL.PROJ.Tests\VL.PROJ.Tests.csproj
+.\build.ps1                       # build + stage dist\ (our dll + the four bundled PROJ files + help)
+.\tools\Test-VLPackage.ps1        # static package checks
+.\tools\Test-VLPatch.ps1          # structural checks on every .vl and Help.xml
+.\pack.ps1                        # dist\feed\VL.PROJ.<version>.nupkg
+.\tools\Compile-HelpPatches.ps1   # vvvvc on every help patch, then READS the generated C#
+.\tools\Open-HelpPatch.ps1 "Move" # open one in vvvv; pid in %TEMP%\vl-proj-vvvv.pid, close only that pid
 ```
+
+Help patches are scaffolded once with `tools\HelpPatchGen.ps1`. After the GUI check the `.vl` is
+the truth. The family's help style applies: a 20pt heading, short `<` notes, cells and not hubs
+(VL.NetTopologySuite's `docs/HELP-PATCH-STYLE.md`).
 
 ## Layout
 
 ```
 vl-proj/
-├── docs/DESIGN.md
+├── VL.PROJ.vl / .nuspec   # the package; the nuspec ships the four bundled PROJ files
+├── THIRD-PARTY-NOTICES.md # SharpProj, PROJ, EPSG, ijwhost
+├── build.ps1, pack.ps1, Open-HelpPatch.cmd, tools/
+├── help/VL.PROJ/          # 3 help patches + Help.xml
+├── docs/DESIGN.md, docs/CRS-RESEARCH.md
 ├── src/VL.PROJ/
 │   ├── ProjNodes.cs     # PROJ - Reproject, CRS (the public nodes)
 │   ├── Engine.cs        # everything that touches PROJ: context, caches, lock, messages
