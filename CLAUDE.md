@@ -17,8 +17,9 @@ about drawing, maps or file formats. It is a member of the VL.NetTopologySuite f
   cost. Rule 1 (`[assembly: ImportAsIs]`) and rule 2 (an upstream library must be a package in a
   package repository) apply here exactly as there.
 
-**State (2026-11-11): version one built and seen working in vvvv 7.4.** Nothing is published, and
-the repository has no remote.
+**State (2026-11-11): version one built and seen working in vvvv 7.4.** It is not on nuget.org.
+The remote is https://github.com/rednotfound/VL.PROJ (public, created by the maintainer). Commit,
+do not push: the maintainer decides each push.
 - Two nodes, `Reproject` and `CRS`, in category `PROJ`.
 - 23 tests.
 - Packaged: `VL.PROJ.vl`, nuspec, `build.ps1` / `pack.ps1`, and a 4.7 MB nupkg.
