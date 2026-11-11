@@ -1,0 +1,24 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <IsPackable>false</IsPackable>
+    <!--
+      As in src: without a RuntimeIdentifier the test output gets SharpProj's 5.7 MB reference
+      stub, which cannot run. ijwhost.dll arrives through the ProjectReference (src copies it).
+    -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <PackageReference Include="Microsoft.NET.Test.Sdk" Version="17.11.1" />
+    <PackageReference Include="xunit" Version="2.9.2" />
+    <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
+    <!-- No ExcludeAssets here, unlike src: a test host supplies no VL.Core of its own. -->
+    <PackageReference Include="VL.Core" Version="2025.7.4" />
+    <ProjectReference Include="..\..\src\VL.PROJ\VL.PROJ.csproj" />
+  </ItemGroup>
+
+</Project>

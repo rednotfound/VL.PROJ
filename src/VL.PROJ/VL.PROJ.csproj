@@ -1,0 +1,56 @@
+<Project Sdk="Microsoft.NET.Sdk">
+
+  <PropertyGroup>
+    <TargetFramework>net8.0</TargetFramework>
+    <Nullable>enable</Nullable>
+    <LangVersion>12.0</LangVersion>
+    <AssemblyName>VL.PROJ</AssemblyName>
+    <RootNamespace>VL.PROJ</RootNamespace>
+    <Version>0.0.1</Version>
+    <Authors>VL.PROJ Contributors</Authors>
+    <Description>PROJ coordinate transformation for NetTopologySuite geometry, as vvvv gamma nodes</Description>
+    <GenerateDocumentationFile>true</GenerateDocumentationFile>
+    <CopyLocalLockFileAssemblies>true</CopyLocalLockFileAssemblies>
+
+    <!--
+      SharpProj.dll is C++/CLI. Its package carries a 5.7 MB reference stub under ref\ and the real
+      7 MB build under runtimes\win-x64\; only a RuntimeIdentifier makes the build copy the real one
+      flat into the output (measured 2026-11-11 in the vvvv probe). vvvv gamma is win-x64 only.
+    -->
+    <RuntimeIdentifier>win-x64</RuntimeIdentifier>
+    <SelfContained>false</SelfContained>
+    <AppendRuntimeIdentifierToOutputPath>false</AppendRuntimeIdentifierToOutputPath>
+  </PropertyGroup>
+
+  <ItemGroup>
+    <!-- Ships inside vvvv; never ours to copy (family rule). -->
+    <PackageReference Include="VL.Core" Version="2025.7.4" ExcludeAssets="runtime" />
+
+    <!-- The family's one NTS version: one assembly identity across every sibling in vvvv. -->
+    <PackageReference Include="NetTopologySuite" Version="2.6.0" />
+
+    <!--
+      PROJ 9.5.1 through SharpProj (Apache-2.0). Bundled in lib\net8.0, NOT a nuspec dependency:
+      installed by NuGet it would sit in a folder of its own where our ijwhost.dll cannot reach
+      it (docs/DESIGN.md). SharpProj.Core is the assembly; SharpProj adds proj.db (the EPSG
+      database, about 9 MB), which PROJ finds beside the assembly with no PROJ_DATA (measured).
+      SharpProj.NetTopologySuite is deliberately not used - see NtsBridge.cs.
+    -->
+    <PackageReference Include="SharpProj.Core" Version="9.5001.295" />
+    <PackageReference Include="SharpProj" Version="9.5001.295" />
+
+    <!--
+      ijwhost.dll: the shim .NET needs to load a C++/CLI assembly. Neither SharpProj's packages nor
+      vvvv 7.4 ship it, and without it SharpProj fails with "FileNotFoundException ... 找不到指定的模块"
+      (negative-tested inside vvvv, 2026-11-11). Taken from Microsoft's own apphost pack (MIT),
+      downloaded by version rather than read out of whatever SDK this machine has.
+    -->
+    <PackageDownload Include="Microsoft.NETCore.App.Host.win-x64" Version="[8.0.34]" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="$(NuGetPackageRoot)microsoft.netcore.app.host.win-x64\8.0.34\runtimes\win-x64\native\ijwhost.dll"
+          Link="ijwhost.dll" CopyToOutputDirectory="PreserveNewest" Visible="false" />
+  </ItemGroup>
+
+</Project>
