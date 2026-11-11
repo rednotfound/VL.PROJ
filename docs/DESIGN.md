@@ -12,7 +12,7 @@ maintainer confirms it.
 
 ## Why this package exists, and why it is separate
 
-- **The research is in VL.NetTopologySuite's `docs/CRS-RESEARCH.md`:** the concepts, the
+- **The research is in [CRS-RESEARCH.md](CRS-RESEARCH.md):** the concepts, the
   libraries compared, the precedent, and the measurements. This document does not repeat it.
 - **VL.NetTopologySuite decided long ago that an SRID is a label there.** Setting one moves
   nothing, and transformation lives in a focused package. This is that package.

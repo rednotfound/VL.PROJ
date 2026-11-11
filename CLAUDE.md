@@ -11,7 +11,8 @@ about drawing, maps or file formats. It is a member of the VL.NetTopologySuite f
 
 **Read first:**
 - [docs/DESIGN.md](docs/DESIGN.md): the engine, the packaging, the model and the proposed nodes.
-- VL.NetTopologySuite's `docs/CRS-RESEARCH.md`: the concepts, libraries and measurements behind it.
+- [docs/CRS-RESEARCH.md](docs/CRS-RESEARCH.md): the concepts, libraries and measurements behind it
+  (written in VL.NetTopologySuite on 2026-11-11, moved here the same day; it is maintained here).
 - VL.NetTopologySuite's `docs/RULES.md`: the family's packaging and runtime rules, each with its
   cost. Rule 1 (`[assembly: ImportAsIs]`) and rule 2 (an upstream library must be a package in a
   package repository) apply here exactly as there.
