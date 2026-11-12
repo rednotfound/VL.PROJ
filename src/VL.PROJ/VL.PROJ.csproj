@@ -30,6 +30,13 @@
     <PackageReference Include="NetTopologySuite" Version="2.6.0" />
 
     <!--
+      VL.NetTopologySuite for ICrsCatalog only (2026-11-12): this package registers PROJ's EPSG catalogue,
+      so GeometryEditor's window and the Geometry IOBox can name any CRS. Compile-time only; vvvv loads
+      the assembly from the VL.NetTopologySuite package, which VL.PROJ.vl and the nuspec declare.
+    -->
+    <PackageReference Include="VL.NetTopologySuite" Version="0.0.7-alpha" ExcludeAssets="runtime" />
+
+    <!--
       PROJ 9.5.1 through SharpProj (Apache-2.0). Bundled in lib\net8.0, NOT a nuspec dependency:
       installed by NuGet it would sit in a folder of its own where our ijwhost.dll cannot reach
       it (docs/DESIGN.md). SharpProj.Core is the assembly; SharpProj adds proj.db (the EPSG

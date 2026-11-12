@@ -45,12 +45,13 @@
       <group targetFramework="net8.0">
         <dependency id="NetTopologySuite" version="2.6.0" />
         <!--
-          Not needed by any node here (they name only NTS types) but by the help: geometry is made
+          Needed by Initializer.cs since 2026-11-12 (VL.NetTopologySuite's ICrsCatalog: its editor window
+          and Geometry IOBox then name any EPSG code), and by the help: geometry is made
           with VL.NetTopologySuite's FromWKT and GeometryFactory, read with its SRID and ToWKT, and
           drawn by its Geometry IOBox. vvvv does not fetch a missing document dependency by itself.
           The same reasoning as VL.NetTopologySuite.GeoJSON's dependency on it.
         -->
-        <dependency id="VL.NetTopologySuite" version="0.0.6-alpha" />
+        <dependency id="VL.NetTopologySuite" version="0.0.7-alpha" />
       </group>
     </dependencies>
   </metadata>

@@ -53,6 +53,31 @@ this one cannot (measured 2026-11-11, inside vvvv 7.4):
 - So all of them go into *our* `lib\net8.0`, and **no SharpProj type may appear on a pin.** Pins
   carry NTS `Geometry`, `int`, `double`, `string` and `bool`.
 
+## The CRS catalogue for VL.NetTopologySuite (2026-11-12)
+
+This package compiles against VL.NetTopologySuite. It is the first sibling with a C# reference to
+it; the others reference only the upstream NTS. The reference serves one interface:
+**ICrsCatalog**. ProjCrsCatalog implements it with Engine.Describe and strips PROJ's
+" (with axis order normalized for visualization)" from names.
+
+Initializer.cs registers the catalogue into **AppHost.Global's services**. It follows the
+VL.IO.Redis pattern: [assembly: AssemblyInitializer(typeof(_VL_.PROJ.Initializer))], and the
+_VL_ namespace keeps the class out of the NodeBrowser. The registry is the GLOBAL one because
+GeometryEditor's window and the Geometry IOBox run in NTS's HDE app host, which never loads
+VL.PROJ.
+
+**Seen working in vvvv 7.4, 2026-11-12:**
+- One tab ran HowTo Look up a CRS, a second ran a GeometryEditor probe with SRID 2263.
+- The window's status bar said EPSG:2263 NAD83 / New York Long Island (ftUS) · US survey foot.
+  2263 is not in NTS's own table, so that name can only have come from here.
+
+Consequences:
+- **The release depends on NTS 0.0.7-alpha being on nuget.org first.**
+  - NuGet.config has a local feed, ..\vl-nettopologysuite\dist\feed. Remove it then.
+  - VL.PROJ.vl and the nuspec both declare VL.NetTopologySuite 0.0.7-alpha.
+- **VL.NetTopologySuite is referenced with ExcludeAssets="runtime".** vvvv loads it from that
+  package, and dist must never contain VL.NetTopologySuite.dll.
+- **The initializer is guarded.** A failure to register logs a warning and never takes the nodes down.
 ## Rules carried from the family that bite here
 
 - **A static node runs 60 times a second.** PROJ objects are built once and cached (`Engine`),
