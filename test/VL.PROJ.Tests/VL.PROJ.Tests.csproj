@@ -18,6 +18,7 @@
     <PackageReference Include="xunit.runner.visualstudio" Version="2.8.2" />
     <!-- No ExcludeAssets here, unlike src: a test host supplies no VL.Core of its own. -->
     <PackageReference Include="VL.Core" Version="2025.7.4" />
+    <PackageReference Include="VL.NetTopologySuite" Version="0.0.7-alpha" />
     <ProjectReference Include="..\..\src\VL.PROJ\VL.PROJ.csproj" />
   </ItemGroup>
 
