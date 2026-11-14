@@ -8,6 +8,9 @@
     <owners>VL.PROJ Contributors</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
+    <projectUrl>https://github.com/rednotfound/VL.PROJ</projectUrl>
+    <!-- nuget.org shows this on the package page; the path is the one INSIDE the package (see <files>). -->
+    <readme>docs\README.md</readme>
     <description>
       EARLY - not ready for real work yet.
 
@@ -25,7 +28,13 @@
     </description>
     <summary>PROJ coordinate transformation for VL.NetTopologySuite, as nodes for vvvv gamma.</summary>
     <releaseNotes>
-      0.0.1-alpha - In development, not published. Reproject and CRS, in category PROJ.
+      0.0.1-alpha (2026-11-14) - First release. Two nodes in category PROJ. Reproject moves a
+      NetTopologySuite geometry from the CRS its SRID names to another EPSG code, and says how
+      accurate that is and whether coordinates lie outside where a CRS is meant to be used. CRS says
+      what an EPSG code is: name, units, area of use. PROJ 9.5.1 and its EPSG database are bundled.
+      With VL.PROJ installed, VL.NetTopologySuite's GeometryEditor window and drawn Geometry IOBox
+      name any EPSG code. Requires VL.NetTopologySuite 0.0.7-alpha. Help patches: HowTo Move a
+      geometry to another CRS, HowTo Look up a CRS.
     </releaseNotes>
     <copyright>Copyright 2026 VL.PROJ Contributors</copyright>
     <!-- The "VL" tag is what makes the pack discoverable at https://vvvv.org/packs -->
@@ -77,6 +86,7 @@
          named "docs/" with no file name at all (measured in the 0.0.1-alpha nupkg, 2026-11-11). -->
     <file src="LICENSE" target="docs\LICENSE" />
     <file src="THIRD-PARTY-NOTICES.md" target="docs\" />
+    <file src="README.md" target="docs\" />
     <file src="docs\DESIGN.md" target="docs\" />
   </files>
 </package>

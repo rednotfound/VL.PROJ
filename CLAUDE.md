@@ -17,11 +17,16 @@ about drawing, maps or file formats. It is a member of the VL.NetTopologySuite f
   cost. Rule 1 (`[assembly: ImportAsIs]`) and rule 2 (an upstream library must be a package in a
   package repository) apply here exactly as there.
 
-**State (2026-11-11): version one built and seen working in vvvv 7.4.** It is not on nuget.org.
-The remote is https://github.com/rednotfound/VL.PROJ (public, created by the maintainer). Commit,
-do not push: the maintainer decides each push.
+**State (2026-11-14): `0.0.1-alpha`, the first release, prepared for nuget.org** (the maintainer
+uploads it in the browser; that upload creates the package ID). Version one was built and seen
+working in vvvv 7.4 on 2026-11-11. The remote is https://github.com/rednotfound/VL.PROJ (public,
+created by the maintainer). Commit, do not push: the maintainer decides each push.
 - Two nodes, `Reproject` and `CRS`, in category `PROJ`.
-- 23 tests.
+- 30 tests (the 7 since 11-11 are `CatalogTests`).
+- `README.md` (packed as the nuget.org readme) and `THIRD-PARTY-NOTICES.md` with the full licence
+  texts, both written for the release on 2026-11-14. The notices cover what `SharpProj.dll` links
+  in statically, found in the binary by its strings: SQLite, libtiff, zlib 1.3.1, liblzma,
+  nlohmann/json. The EPSG terms of use require telling recipients the terms and crediting IOGP.
 - Packaged: `VL.PROJ.vl`, nuspec, `build.ps1` / `pack.ps1`, and a 4.7 MB nupkg.
 - Three help patches: the Explanation, `HowTo Move a geometry to another CRS` and `HowTo Look up a CRS`.
 
@@ -30,7 +35,7 @@ two; `SetSRID` goes into VL.NetTopologySuite.
 
 | check | state |
 |---|---|
-| `dotnet test` | ✅ 23 |
+| `dotnet test` | ✅ 30 |
 | `tools\Test-VLPackage.ps1`, `tools\Test-VLPatch.ps1` | ✅ |
 | `tools\Compile-HelpPatches.ps1` (`vvvvc`, generated C# read) | ✅ 3 of 3; `Reproject`, `CRS` and the VL.NetTopologySuite nodes resolve; `To SRID` is wired; no NU1101 |
 | vvvv GUI | ✅ both HowTos computed, captured on 2026-11-11: RD square to lon/lat with accuracy 1 m; SRID 0 refused; CRS 28992 = Amersfoort / RD New, metre, area 4.3° × 3.0° |
@@ -72,8 +77,9 @@ VL.PROJ.
   2263 is not in NTS's own table, so that name can only have come from here.
 
 Consequences:
-- **The release depends on NTS 0.0.7-alpha being on nuget.org first.**
-  - NuGet.config has a local feed, ..\vl-nettopologysuite\dist\feed. Remove it then.
+- **The release depended on NTS 0.0.7-alpha being on nuget.org first.** It is, since 2026-11-14,
+  and the local feed ..\vl-nettopologysuite\dist\feed is gone from NuGet.config; the restore was
+  checked to come from nuget.org (signed).
   - VL.PROJ.vl and the nuspec both declare VL.NetTopologySuite 0.0.7-alpha.
 - **VL.NetTopologySuite is referenced with ExcludeAssets="runtime".** vvvv loads it from that
   package, and dist must never contain VL.NetTopologySuite.dll.
@@ -121,7 +127,8 @@ the truth. The family's help style applies: a 20pt heading, short `<` notes, cel
 ```
 vl-proj/
 ├── VL.PROJ.vl / .nuspec   # the package; the nuspec ships the four bundled PROJ files
-├── THIRD-PARTY-NOTICES.md # SharpProj, PROJ, EPSG, ijwhost
+├── README.md              # also the nuget.org readme (packed to docs\)
+├── THIRD-PARTY-NOTICES.md # SharpProj, PROJ and what it links in, EPSG, ijwhost: full texts
 ├── build.ps1, pack.ps1, Open-HelpPatch.cmd, tools/
 ├── help/VL.PROJ/          # 3 help patches + Help.xml
 ├── docs/DESIGN.md, docs/CRS-RESEARCH.md
@@ -130,6 +137,8 @@ vl-proj/
 │   ├── Engine.cs        # everything that touches PROJ: context, caches, lock, messages
 │   ├── NtsBridge.cs     # TransformFilter: a PROJ transform over an NTS geometry's coordinates
 │   ├── Wgs84.cs         # the SRID 4326 factory for Area Of Use
+│   ├── ProjCrsCatalog.cs # VL.NetTopologySuite's ICrsCatalog, answered by Engine.Describe
+│   ├── Initializer.cs   # [assembly: AssemblyInitializer]: registers the catalogue in AppHost.Global
 │   └── AssemblyInfo.cs  # ImportAsIs
-└── test/VL.PROJ.Tests/  # ReprojectTests, CrsTests, NodeDocsTests
+└── test/VL.PROJ.Tests/  # ReprojectTests, CrsTests, CatalogTests, NodeDocsTests
 ```
