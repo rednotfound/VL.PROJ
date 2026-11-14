@@ -17,8 +17,10 @@ about drawing, maps or file formats. It is a member of the VL.NetTopologySuite f
   cost. Rule 1 (`[assembly: ImportAsIs]`) and rule 2 (an upstream library must be a package in a
   package repository) apply here exactly as there.
 
-**State (2026-11-14): `0.0.1-alpha`, the first release, prepared for nuget.org** (the maintainer
-uploads it in the browser; that upload creates the package ID). Version one was built and seen
+**State (2026-11-14): `0.0.1-alpha` is on nuget.org, the first release** (browser upload by the
+maintainer, which created the package ID; installed back from nuget.org alone, all four packages
+signed, 3 of 3 patches compile; GitHub release made with `gh`). **The working version is
+`0.0.2-alpha`**, always one ahead of the published one. Version one was built and seen
 working in vvvv 7.4 on 2026-11-11. The remote is https://github.com/rednotfound/VL.PROJ (public,
 created by the maintainer). Commit, do not push: the maintainer decides each push.
 - Two nodes, `Reproject` and `CRS`, in category `PROJ`.

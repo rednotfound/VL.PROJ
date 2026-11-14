@@ -2,7 +2,8 @@
 <package xmlns="http://schemas.microsoft.com/packaging/2013/05/nuspec.xsd">
   <metadata>
     <id>VL.PROJ</id>
-    <version>0.0.1-alpha</version>
+    <!-- The WORKING version: always one ahead of what is on nuget.org, as in the siblings. -->
+    <version>0.0.2-alpha</version>
     <title>VL.PROJ - coordinate transformation for NetTopologySuite in vvvv gamma</title>
     <authors>VL.PROJ Contributors</authors>
     <owners>VL.PROJ Contributors</owners>
@@ -28,6 +29,8 @@
     </description>
     <summary>PROJ coordinate transformation for VL.NetTopologySuite, as nodes for vvvv gamma.</summary>
     <releaseNotes>
+      0.0.2-alpha - In development, not published.
+
       0.0.1-alpha (2026-11-14) - First release. Two nodes in category PROJ. Reproject moves a
       NetTopologySuite geometry from the CRS its SRID names to another EPSG code, and says how
       accurate that is and whether coordinates lie outside where a CRS is meant to be used. CRS says
