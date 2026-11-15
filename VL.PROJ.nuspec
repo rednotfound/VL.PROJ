@@ -12,22 +12,8 @@
     <projectUrl>https://github.com/rednotfound/VL.PROJ</projectUrl>
     <!-- nuget.org shows this on the package page; the path is the one INSIDE the package (see <files>). -->
     <readme>docs\README.md</readme>
-    <description>
-      EARLY - not ready for real work yet.
-
-      Moves NetTopologySuite geometry from one coordinate reference system to another with PROJ,
-      the engine every GIS uses. Reproject reads the CRS a geometry is in from its SRID and moves
-      it to another EPSG code, saying how accurate that is and warning when coordinates lie
-      outside where a CRS is meant to be used. CRS says what an EPSG code is: name, units, area
-      of use. Longitude comes first, always.
-
-      PROJ 9.5.1 and its EPSG database come bundled (through SharpProj), so nothing else needs
-      installing. Windows x64 only, as vvvv gamma is. Requires the Visual C++ 2015-2022 runtime,
-      which most Windows machines have.
-
-      Requires vvvv gamma 7.2 or newer (.NET 8).
-    </description>
-    <summary>PROJ coordinate transformation for VL.NetTopologySuite, as nodes for vvvv gamma.</summary>
+    <description>Move geometry between coordinate systems in VL, with PROJ and its EPSG database.</description>
+    <summary>Move geometry between coordinate systems in VL, with PROJ and its EPSG database.</summary>
     <releaseNotes>
       0.0.2-alpha - In development, not published.
 
