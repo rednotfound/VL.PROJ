@@ -5,8 +5,8 @@
     <!-- The WORKING version: always one ahead of what is on nuget.org, as in the siblings. -->
     <version>0.0.2-alpha</version>
     <title>VL.PROJ - coordinate transformation for NetTopologySuite in vvvv gamma</title>
-    <authors>VL.PROJ Contributors</authors>
-    <owners>VL.PROJ Contributors</owners>
+    <authors>red</authors>
+    <owners>red</owners>
     <requireLicenseAcceptance>false</requireLicenseAcceptance>
     <license type="expression">MIT</license>
     <projectUrl>https://github.com/rednotfound/VL.PROJ</projectUrl>
