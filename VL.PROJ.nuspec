@@ -15,7 +15,8 @@
     <description>Move geometry between coordinate systems in VL, with PROJ and its EPSG database.</description>
     <summary>Move geometry between coordinate systems in VL, with PROJ and its EPSG database.</summary>
     <releaseNotes>
-      0.0.2-alpha - In development, not published.
+      0.0.2-alpha (2026-11-18) - No node changed. The package page: a short README in the shape
+      vvvv libraries use, one sentence of description, and authors and owners "red".
 
       0.0.1-alpha (2026-11-14) - First release. Two nodes in category PROJ. Reproject moves a
       NetTopologySuite geometry from the CRS its SRID names to another EPSG code, and says how
