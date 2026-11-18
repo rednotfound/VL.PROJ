@@ -3,7 +3,7 @@
   <metadata>
     <id>VL.PROJ</id>
     <!-- The WORKING version: always one ahead of what is on nuget.org, as in the siblings. -->
-    <version>0.0.2-alpha</version>
+    <version>0.0.3-alpha</version>
     <title>VL.PROJ - coordinate transformation for NetTopologySuite in vvvv gamma</title>
     <authors>red</authors>
     <owners>red</owners>
@@ -15,6 +15,8 @@
     <description>Move geometry between coordinate systems in VL, with PROJ and its EPSG database.</description>
     <summary>Move geometry between coordinate systems in VL, with PROJ and its EPSG database.</summary>
     <releaseNotes>
+      0.0.3-alpha - In development, not published.
+
       0.0.2-alpha (2026-11-18) - No node changed. The package page: a short README in the shape
       vvvv libraries use, one sentence of description, and authors and owners "red".
 
